@@ -1,2 +1,6 @@
-# phone-catalogue-static
-Static pages of phone catalogue
+# Phones
+
+npm install
+npm start
+
+open: localhost:3000/public
