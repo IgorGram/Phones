@@ -158,9 +158,8 @@ class PhoneCatalogue{
     constructor(options){
         this._el = options.el;
         this._el.addEventListener("click",this._onPhoneClick.bind(this));
-        this._render(this._getPhones());
+        this._loadPhones();
     }
-
     on(eventName, handler){
         this._el.addEventListener(eventName, handler)
     }
@@ -173,6 +172,8 @@ class PhoneCatalogue{
         });
         this._el.dispatchEvent(myEvent);
     }
+
+
     _onPhoneClick(event){
         let phoneLink = event.target.closest('[data-element="phone-link"]');
 
@@ -217,7 +218,10 @@ class PhoneCatalogue{
 
         this._el.innerHTML = html;
     }
-    _getPhones(){
-        return phonesFromServer;
+    _loadPhones(){
+       var catalog = this;
+       HttpService.getJSON('data/phones/phones.json',function (phones) {
+            catalog._render(phones)
+       })
     }
 }
